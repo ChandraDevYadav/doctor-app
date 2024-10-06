@@ -44,14 +44,14 @@ const MobileNavbar = () => {
 
       {/* Navigation Menu - Sliding from the Left */}
       <div
-        className={`fixed top-0 overflow-scroll left-0 h-full bg-gray-100 transform transition-transform duration-300 ease-in-out ${
+        className={`fixed top-0 overflow-scroll left-0 h-full bg-blue-600 transform transition-transform duration-300 ease-in-out ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } w-1/2 z-50 shadow-lg`}
       >
-        <div className="bg-cover bg-left h-24 bg-gray-200" style={{ backgroundImage: "url('/hp1.jpg')" }}>
+        <div className="bg-cover bg-left h-14 bg-blue-700" >
           <div className='flex justify-end'>
           <button
-            className="text-black bg-white rounded-full m-1 p-1 shadow-lg focus:outline-none"
+            className="text-white rounded-full mt-3 p-1 shadow-lg focus:outline-none"
             onClick={() => setIsOpen(false)}
           >
             <svg
@@ -72,74 +72,79 @@ const MobileNavbar = () => {
           </div>
         </div>
 
-        <ul className="flex flex-col p-4">
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/">
+        <ul className="flex flex-col p-4 ">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/">
               Home
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/departments">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/departments">
               Departments
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/doctor">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/pages/doctor">
               Doctors
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/service">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/service">
               Services
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/shop">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/shop">
               Shop
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/blog">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/blog">
               Blog
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/pages">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/blogdetail">
+              Blog Detail
+            </Link>
+          </li>
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/pages">
               Pages
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/gallery">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/pages/gallery">
               Gallery
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/about">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/about">
               About
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/contact">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/contact">
               Contact
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/setting">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/setting">
               Setting
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/notification">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/notification">
               Notification
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/profile">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/profile">
               Profile
             </Link>
           </li>
-          <li className="mb-3">
-            <Link className="block hover:text-blue-600" href="/login">
+          <li className="mb-5 font-bold">
+            <Link className="block text-white" href="/login">
               Logout
             </Link>
           </li>

@@ -42,13 +42,13 @@ const Navbar = () => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem>
-                  <Link href="/doctor" className="">
+                  <Link href="/pages/doctor" className="">
                     Doctors
                   </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem>
-                  <Link href="/doctordetail" className="">
+                  <Link href="/pages/doctordetail" className="">
                     Doctors Details
                   </Link>
                   </DropdownMenuItem>
@@ -117,16 +117,12 @@ const Navbar = () => {
             <DropdownMenu>
                 <DropdownMenuTrigger className='focus:outline-none'>
                   <p className="">
-                    Pages
+                    Gallery
                   </p>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem><Link href="/about" className="">
-                  About Us
-                  </Link></DropdownMenuItem>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem><Link href="/contact" className="">
-                  Contact Us
+                  <DropdownMenuItem><Link href="/pages/gallery" className="">
+                  Gallery
                   </Link></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

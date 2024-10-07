@@ -1,8 +1,6 @@
 import AppointmentForm from "./components/AppointmentForm/AppointmentForm";
 import CounterSec from "./components/CounterSec/CounterSec";
-import Deep from "./components/Deep/Deep";
 import FeedbackPage from "./components/FeedBack/FeedBack";
-import Footer from "./components/Footer/Footer";
 import Hero from "./components/Hero/hero";
 import Marquee from "./components/Marquee/Marquee";
 import NewsLetter from "./components/NewsLetter/NewsLetter";
@@ -24,7 +22,6 @@ export default function Home() {
       <FeedbackPage/>
       <Marquee/>
       <NewsLetter/>
-      <Footer/>
     </div>
   );
 }

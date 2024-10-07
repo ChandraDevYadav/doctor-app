@@ -5,7 +5,7 @@ import React from "react";
 const Footer = () => {
   return (
     <div
-      className="bg-cover bg-left pt-24 px-4 sm:px-10 md:px-20 lg:px-40"
+      className="bg-cover bg-left pt-2 md:pt-24 px-4 sm:px-10 md:px-20 lg:px-40"
       style={{ backgroundImage: "url('/bg1.png')" }}
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pb-16 gap-8">

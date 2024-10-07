@@ -31,7 +31,7 @@ const ImageGallery = () => {
               alt="Main"
               className="w-full h-[300px] md:h-[500px] object-cover rounded-md shadow-lg p-4"
             /> */}
-            <Image src={mainImage} width='500' height='500' className='object-cover w-full'/>
+            <Image src={mainImage} alt='image' width='500' height='500' className='object-cover w-full'/>
           </div>
 
           {/* Thumbnails */}

@@ -4,6 +4,7 @@ import SocialNav from "./components/Navbar/SocialNav";
 import VisitNav from "./components/Navbar/VisitNav";
 import Navbar from "./components/Navbar/Navbar";
 import MobileNavbar from "./components/Navbar/MobileNavbar";
+import Footer from "./components/Footer/Footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
         <MobileNavbar/>
 
         {children}
+        <Footer/>
       </body>
     </html>
   );

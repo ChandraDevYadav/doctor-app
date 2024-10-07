@@ -58,7 +58,7 @@ const renderStars = (rating) => {
   // Add full stars
   for (let i = 0; i < fullStars; i++) {
     stars.push(
-      <img
+      <Image
         key={i}
         src="https://cdn-icons-png.flaticon.com/128/2107/2107957.png"
         alt="Full Star"
@@ -70,7 +70,7 @@ const renderStars = (rating) => {
   // Add half star if applicable
   if (halfStar) {
     stars.push(
-      <img
+      <Image
         key="half"
         src="https://cdn-icons-png.flaticon.com/128/16730/16730242.png"
         alt="Half Star"
@@ -82,7 +82,7 @@ const renderStars = (rating) => {
   // Add empty stars to make it a total of 5 stars
   for (let i = fullStars + (halfStar ? 1 : 0); i < 5; i++) {
     stars.push(
-      <img
+      <Image
         key={i + "empty"}
         src="/empty-star.png"
         alt="Empty Star"

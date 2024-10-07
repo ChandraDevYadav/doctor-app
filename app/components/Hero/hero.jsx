@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Main content */}
         <div className="flex justify-center md:justify-start items-center px-6 md:px-0">
-          <div className="mt-16 md:mt-36 md:ml-20 lg:ml-44 text-center md:text-left">
+          <div className="pt-12 md:pt-20 md:ml-20 lg:ml-44 text-center md:text-left">
             <p className="text-2xl md:text-4xl text-white mb-4 font-semibold">
               Best Medical Clinic
             </p>
@@ -33,17 +33,17 @@ export default function Hero() {
         </div>
         {/* Empty space on larger screens */}
         <div className="">
-          <div className='flex justify-center items-center pt-36 md:pt-36'>
+          <div className='flex justify-center items-center pt-4 md:pt-36'>
           <Carousel className='px-4'>
   <CarouselContent className='relative'>
     <CarouselItem>
-      <Image src='/hp.jpg' width='500' height='500' className='object-cover w-full h-full'/>
+      <Image src='/hp.jpg' alt='image' width='500' height='500' className='object-cover w-full h-full'/>
     </CarouselItem>
     <CarouselItem>
-    <Image src='/hp1.jpg' width='500' height='500' className='object-cover w-full h-full'/>
+    <Image src='/hp1.jpg' alt='image' width='500' height='500' className='object-cover w-full h-full'/>
     </CarouselItem>
     <CarouselItem>
-    <Image src='/hp22.jpg' width='500' height='500' className='object-cover w-full h-full'/>
+    <Image src='/hp22.jpg' alt='image' width='500' height='500' className='object-cover w-full h-full'/>
     </CarouselItem>
   </CarouselContent>
   <CarouselPrevious className='absolute left-8' />

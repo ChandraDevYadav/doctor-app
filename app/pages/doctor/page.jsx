@@ -169,7 +169,7 @@ const renderStars = (rating) => {
   const stars = [];
   for (let i = 0; i < fullStars; i++) {
     stars.push(
-      <img
+      <Image
         key={i}
         src="https://cdn-icons-png.flaticon.com/128/2107/2107957.png"
         alt="Full Star"
@@ -181,7 +181,7 @@ const renderStars = (rating) => {
   // Add half star if applicable
   if (halfStar) {
     stars.push(
-      <img
+      <Image
         key="half"
         src="https://cdn-icons-png.flaticon.com/128/16730/16730242.png"
         alt="Half Star"
@@ -200,6 +200,18 @@ const renderStars = (rating) => {
 
 const Page = () => {
   return (
+    <div>
+      <div className='grid grid-cols-1 bg-cover bg-left' style={{ backgroundImage: "url('/pageheader.jpg')" }}>
+        <div className='flex justify-center items-center py-16 md:py-24'>
+            <div className=''>
+            <h1 className='text-3xl md:text-5xl font-bold py-4 md:py-6 text-blue-600'>From Our Doctor</h1>
+            <div className='text-center flex justify-center items-center'>
+            <p className='text-blue-600 text-center text-lg font-semibold'>Home&nbsp; - &nbsp;</p>
+            <Link href='/' className='text-lg font-semibold'>Doctor</Link>
+            </div>
+            </div>
+        </div>
+    </div>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-4 md:px-20 py-4 md:py-12">
       {doctors.map((doctor, index) => (
         <div key={index} className="border p-4 rounded shadow">
@@ -229,6 +241,7 @@ const Page = () => {
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };

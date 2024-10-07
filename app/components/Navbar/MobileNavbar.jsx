@@ -109,11 +109,6 @@ const MobileNavbar = () => {
             </Link>
           </li>
           <li className="mb-5 font-bold">
-            <Link className="block text-white" href="/pages">
-              Pages
-            </Link>
-          </li>
-          <li className="mb-5 font-bold">
             <Link className="block text-white" href="/pages/gallery">
               Gallery
             </Link>
@@ -124,22 +119,17 @@ const MobileNavbar = () => {
             </Link>
           </li>
           <li className="mb-5 font-bold">
-            <Link className="block text-white" href="/contact">
+            <Link className="block text-white" href="/pages/contact">
               Contact
             </Link>
           </li>
           <li className="mb-5 font-bold">
-            <Link className="block text-white" href="/setting">
+            <Link className="block text-white" href="/pages/setting">
               Setting
             </Link>
           </li>
           <li className="mb-5 font-bold">
-            <Link className="block text-white" href="/notification">
-              Notification
-            </Link>
-          </li>
-          <li className="mb-5 font-bold">
-            <Link className="block text-white" href="/profile">
+            <Link className="block text-white" href="/pages/profile">
               Profile
             </Link>
           </li>

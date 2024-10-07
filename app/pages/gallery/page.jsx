@@ -5,6 +5,8 @@ import Slider from 'react-slick'; // Import Slider from react-slick
 import { PlusCircle } from 'lucide-react'; // Plus icon from lucide-react
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css'; 
+import Link from 'next/link';
+import Image from 'next/image';
 
 const galleryItems = [
   {
@@ -54,13 +56,27 @@ const Gallery = () => {
   };
 
   return (
-    <div className="p-8">
+    <div>
+      <div className='grid grid-cols-1 bg-cover bg-left' style={{ backgroundImage: "url('/pageheader.jpg')" }}>
+        <div className='flex justify-center items-center py-16 md:py-24'>
+            <div className=''>
+            <h1 className='text-3xl md:text-5xl font-bold py-4 md:py-6 text-blue-600'>From Our Gallery</h1>
+            <div className='text-center flex justify-center items-center'>
+            <p className='text-blue-600 text-center text-lg font-semibold'>Home&nbsp; - &nbsp;</p>
+            <Link href='/' className='text-lg font-semibold'>Gallery</Link>
+            </div>
+            </div>
+        </div>
+    </div>
+      <div className="p-8">
       <h1 className="text-4xl text-center font-bold mb-8">Gallery</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         {galleryItems.map((item, index) => (
           <div key={index} className="relative group overflow-hidden rounded-lg shadow-lg">
             {/* Image */}
-            <img
+            <Image
+            width='600'
+            height='600'
               src={item.imageUrl}
               alt={`Gallery item ${index + 1}`}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
@@ -89,7 +105,9 @@ const Gallery = () => {
             </button>
             <Slider {...settings}>
               {galleryItems.map((item, index) => (
-                <img
+                <Image
+                width='600'
+            height='600'
                   key={index}
                   src={item.imageUrl}
                   alt={`Gallery item ${index + 1}`}
@@ -100,6 +118,7 @@ const Gallery = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

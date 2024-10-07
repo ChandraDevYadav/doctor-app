@@ -72,12 +72,16 @@ const AppointmentForm = () => {
               {/* Dropdown selection */}
               <select
                 id="dropdown"
-                className="block w-full py-[0.9rem] pl-3 placeholder-white text-white bg-transparent border border-white focus:outline-none focus:ring-2 focus:border-white"
+                className="block w-full py-[0.9rem] pl-3 placeholder-white text-black bg-transparent border border-white focus:outline-none focus:ring-2 focus:border-white"
               >
-                <option value="">Select an option</option>
-                <option value="option1">Option 1</option>
-                <option value="option2">Option 2</option>
-                <option value="option3">Option 3</option>
+                <option value="">Select Departments</option>
+                <option value="option1">Outpatient Surgery</option>
+                <option value="option2">Cardiac Clinicy</option>
+                <option value="option3">Ophthalmology Clinic</option>
+                <option value="option3">Gynaecological Clinic</option>
+                <option value="option3">Outpatient Rehabilitation</option>
+                <option value="option3">Laryngological Clinic</option>
+                <option value="option3">Pediatric Clinic</option>
               </select>
               {/* Date input */}
               <input

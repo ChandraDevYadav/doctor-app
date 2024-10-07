@@ -34,6 +34,11 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="text-[14px]">
+            <Link href="/about" className="">
+                About
+              </Link>
+            </li>
+            <li className="text-[14px]">
             <DropdownMenu>
                 <DropdownMenuTrigger className='focus:outline-none'>
                   <p className="">
@@ -117,12 +122,21 @@ const Navbar = () => {
             <DropdownMenu>
                 <DropdownMenuTrigger className='focus:outline-none'>
                   <p className="">
-                    Gallery
+                    Pages
                   </p>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuItem><Link href="/pages/gallery" className="">
                   Gallery
+                  </Link></DropdownMenuItem>
+                  <DropdownMenuItem><Link href="/pages/contact" className="">
+                  Contact
+                  </Link></DropdownMenuItem>
+                  <DropdownMenuItem><Link href="/pages/setting" className="">
+                  Setting
+                  </Link></DropdownMenuItem>
+                  <DropdownMenuItem><Link href="/pages/profile" className="">
+                  Profile
                   </Link></DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

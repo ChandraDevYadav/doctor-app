@@ -12,6 +12,7 @@ const MainCard = () => {
         <div className="shadow-md">
           <Image
             src="/mcard.jpg"
+            alt='image'
             width="1000"
             height="1000"
             className="object-cover w-full h-auto transition-transform duration-300 ease-linear hover:scale-95 rounded"
@@ -49,6 +50,7 @@ const MainCard = () => {
                 <div className="flex justify-center ml-4">
                   <Image
                     src="/code.png"
+                    alt='image'
                     width="20"
                     height="20"
                     className="object-cover w-12 md:w-16 mt-1"
@@ -86,6 +88,7 @@ const MainCard = () => {
               <div className='flex justify-center items-center rounded-sm bg-blue-700 px-6 py-2'>
               <Image
                     src="/price-tag.png"
+                    alt='image'
                     width="20"
                     height="20"
                     className="w-6 h-6"

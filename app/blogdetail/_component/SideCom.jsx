@@ -90,28 +90,28 @@ const SideCom = () => {
                 <Link href='' className='hover:text-blue-600 font-bold'>Foula Revunr Andin Mare Ngern Tache Create</Link>
                 <p className='mt-2'>March 24, 2024</p>
             </div>
-            <Image src='/6.jpg' width='50' height='50' className='w-20 h-20 rounded'/>
+            <Image src='/6.jpg' alt='image' width='50' height='50' className='w-20 h-20 rounded'/>
           </div>
           <div className="flex justify-between items-center mt-4 border-t border-t-gray-300 pt-4 hover:text-blue-600 hover:ml-2">
           <div className='pr-9 md:pr-7'>
                 <Link href='' className='hover:text-blue-600 font-bold'>Revunr Andin Mare Ngern Tache Create Fanny</Link>
                 <p className='mt-2'>March 24, 2024</p>
             </div>
-            <Image src='/07.jpg' width='50' height='50' className='w-20 h-20 rounded'/>
+            <Image src='/07.jpg' alt='image' width='50' height='50' className='w-20 h-20 rounded'/>
           </div>
           <div className="flex justify-between items-center mt-4 border-t border-t-gray-300 pt-4 hover:text-blue-600 hover:ml-2">
           <div className='pr-9 md:pr-7'>
                 <Link href='' className='hover:text-blue-600 font-bold'>Andin Mare Ngern Tache Create Medical Psd</Link>
                 <p className='mt-2'>March 24, 2024</p>
             </div>
-            <Image src='/08.jpg' width='50' height='50' className='w-20 h-20 rounded'/>
+            <Image src='/08.jpg' alt='image' width='50' height='50' className='w-20 h-20 rounded'/>
           </div>
           <div className="flex justify-between items-center mt-4 border-t border-t-gray-300 pt-4 hover:text-blue-600 hover:ml-2">
           <div className='pr-9 md:pr-7'>
                 <Link href='' className='hover:text-blue-600 font-bold'>Foula Revunr Andin Mare Tache Create Fanny</Link>
                 <p className='mt-2'>March 24, 2024</p>
             </div>
-            <Image src='/10.jpg' width='50' height='50' className='w-20 h-20 rounded'/>
+            <Image src='/10.jpg' alt='image' width='50' height='50' className='w-20 h-20 rounded'/>
           </div>
         </div>
       </div>
@@ -198,15 +198,15 @@ const SideCom = () => {
         </div>
         <div className='mt-8'>
           <div className="grid grid-cols-3 gap-2">
-          <Image src='/6.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/07.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/08.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/09.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/10.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/4.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/14.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/15.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
-          <Image src='/16.jpg' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/6.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/07.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/08.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/09.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/10.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/4.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/14.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/15.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
+          <Image src='/16.jpg' alt='image' width='100' height='100' className='w-20 h-20 rounded'/>
           </div>
         </div>
       </div>

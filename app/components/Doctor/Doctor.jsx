@@ -169,11 +169,13 @@ const renderStars = (rating) => {
   const stars = [];
   for (let i = 0; i < fullStars; i++) {
     stars.push(
-      <img
+      <Image
         key={i}
         src="https://cdn-icons-png.flaticon.com/128/2107/2107957.png"
         alt="Full Star"
         className="w-4 h-4 inline"
+        width='30'
+        height='30'
       />
     );
   }
@@ -181,11 +183,13 @@ const renderStars = (rating) => {
   // Add half star if applicable
   if (halfStar) {
     stars.push(
-      <img
+      <Image
         key="half"
         src="https://cdn-icons-png.flaticon.com/128/16730/16730242.png"
         alt="Half Star"
         className="w-4 h-4 inline"
+        width='30'
+        height='30'
       />
     );
   }

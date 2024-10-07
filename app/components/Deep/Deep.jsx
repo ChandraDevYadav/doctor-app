@@ -21,47 +21,47 @@ const Deep = () => {
               <TabsList className="py-14 gap-5 ml-20">
                 <TabsTrigger value="rhinology1" className="p-6">
                   <div>
-                    <Image src="/01.png" width="60" height="60" />
+                    <Image src="/01.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology2" className="p-6">
                   <div>
-                    <Image src="/02.png" width="60" height="60" />
+                    <Image src="/02.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology3" className="p-6">
                   <div>
-                    <Image src="/03.png" width="60" height="60" />
+                    <Image src="/03.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology4" className="p-6">
                   <div>
-                    <Image src="/04.png" width="60" height="60" />
+                    <Image src="/04.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology5" className="p-6">
                   <div>
-                    <Image src="/05.png" width="60" height="60" />
+                    <Image src="/05.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology6" className="p-6">
                   <div>
-                    <Image src="/06.png" width="60" height="60" />
+                    <Image src="/06.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology7" className="p-6">
                   <div>
-                    <Image src="/07.png" width="60" height="60" />
+                    <Image src="/07.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology8" className="p-6">
                   <div>
-                    <Image src="/08.png" width="60" height="60" />
+                    <Image src="/08.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
                 <TabsTrigger value="rhinology9" className="p-6">
                   <div>
-                    <Image src="/09.png" width="60" height="60" />
+                    <Image src="/09.png" alt='image' width="60" height="60" />
                   </div>
                 </TabsTrigger>
               </TabsList>
@@ -96,7 +96,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -133,7 +133,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -170,7 +170,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -207,7 +207,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -244,7 +244,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -281,7 +281,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -318,7 +318,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -355,7 +355,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>
@@ -392,7 +392,7 @@ const Deep = () => {
                         width="500"
                         height="500"
                         className="w-full h-full object-cover"
-                        alt="Responsive Image"
+                        alt="image"
                       />
                     </div>
                   </div>

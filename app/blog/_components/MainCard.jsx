@@ -22,6 +22,7 @@ const MainCard = () => {
         <div className="shadow-md">
           <Image
             src="/mcard.jpg"
+            alt='image'
             width="1000"
             height="1000"
             className="object-cover w-full h-auto transition-transform duration-300 ease-linear hover:scale-95 rounded"
@@ -152,6 +153,7 @@ const MainCard = () => {
           <div className='flex justify-center items-center'>
             <Image
               src="/code.png"
+              alt='image'
               width="50"
               height="50"
               className="object-cover w-24"

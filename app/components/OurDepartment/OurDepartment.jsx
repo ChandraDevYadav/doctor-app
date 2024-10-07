@@ -146,8 +146,8 @@ const OurDepartment = () => {
   return (
     <div className="bg-[#f5f9ff] px-4 md:px-10 lg:px-28 pb-16 md:pb-16">
       <div className="pt-12 md:pt-20">
-        <p className="text-center text-2xl md:text-3xl">We Are The</p>
-        <h1 className="text-3xl md:text-5xl font-bold text-center mt-4 pb-8 md:pb-16">
+        <p className="text-center text-xl md:text-3xl">We Are The</p>
+        <h1 className="text-2xl md:text-5xl font-bold text-center mt-4 pb-8 md:pb-16">
           Best Our Departments Centers
         </h1>
       </div>

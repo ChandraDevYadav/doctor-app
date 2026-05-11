@@ -1,48 +1,55 @@
-import { Clock, Mail, Phone } from "lucide-react";
+"use client";
+
+import { Mail, Phone, MapPin, Clock } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import { motion } from "framer-motion";
 
 const VisitNav = () => {
   return (
-    <div className='hidden md:block'>
-      <div className="grid grid-cols-3 bg-white py-3">
-      <div>
-        <div className="flex justify-center items-center gap-4">
-          <Image src="/hlo1.png" alt="" width="50" height="50" />
-          <div>
-            <h1 className="text-[#0071ef] font-bold text-3xl">Swasthya</h1>
-            <p className="text-[#0071ef] text-center text-lg">Sathi</p>
+    <div className='hidden lg:block bg-background border-b'>
+      <div className="container mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Brand/Logo Area */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="flex items-center gap-4"
+        >
+          <div className="relative">
+            <div className="absolute -inset-2 bg-primary/10 rounded-full blur-xl" />
+            <Image src="/hlo1.png" alt="Logo" width="50" height="50" className="relative z-10" />
           </div>
+          <div>
+            <h1 className="text-primary font-black text-2xl tracking-tighter">SWASTHYA</h1>
+            <p className="text-muted-foreground text-xs font-bold tracking-[0.2em] uppercase">Healthcare</p>
+          </div>
+        </motion.div>
+
+        {/* Info Area */}
+        <div className="flex items-center gap-10">
+          {[
+            { label: "Call Us", value: "+977-9805912060", icon: Phone, color: "text-blue-500" },
+            { label: "Email", value: "info@swasthya.com", icon: Mail, color: "text-indigo-500" },
+            { label: "Visit", value: "Biratnagar, Nepal", icon: MapPin, color: "text-rose-500" },
+          ].map((item, i) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: i * 0.1 }}
+              className="flex items-center gap-4 group cursor-default"
+            >
+              <div className={`w-10 h-10 rounded-2xl bg-muted flex items-center justify-center ${item.color} group-hover:scale-110 transition-transform`}>
+                <item.icon className="w-5 h-5" />
+              </div>
+              <div>
+                <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">{item.label}</p>
+                <p className="text-sm font-semibold group-hover:text-primary transition-colors">{item.value}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
-      <div className="col-span-2 flex justify-start items-center gap-8">
-        <div className="flex justify-center items-center gap-5">
-          <Image src="/sp.png" alt="" width="40" height="40" />
-          <div>
-            <p className="text-gray-400 text-[16px]">Number :</p>
-            <p className="text-black font-bold text-md">+977-9805912060</p>
-          </div>
-        </div>
-        <div className="flex justify-center items-center gap-5">
-          <Image src="/en.png" alt="" width="40" height="40" />
-          <div>
-            <p className="text-gray-400 text-[16px]">Email :</p>
-            <p className="text-black font-bold text-md">
-              yadavchandradev4@gmail.com
-            </p>
-          </div>
-        </div>
-        <div className="flex justify-center items-center gap-5">
-          <Image src="/lo.png" alt="" width="40" height="40" />
-          <div>
-            <p className="text-gray-400 text-[16px]">Address :</p>
-            <p className="text-black font-bold text-md">
-              Bhattachowk-1 Biratnagar Nepal
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
     </div>
   );
 };

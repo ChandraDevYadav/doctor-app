@@ -1,50 +1,46 @@
-import { ChevronsRight, Globe, Home, MessageCircle, Phone } from "lucide-react";
+import { ChevronsRight, Home, Phone, Mail } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
   return (
-    <div
-      className="bg-cover bg-left pt-2 md:pt-24 px-4 sm:px-10 md:px-20 lg:px-40"
-      style={{ backgroundImage: "url('/bg1.png')" }}
-    >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 pb-16 gap-8">
-        <div>
-          <h1 className='text-3xl sm:text-2xl font-bold mb-5'>Contact Info</h1>
-          <p className='mb-4'>
-            Rapidiously seize wireless strategic theme areas and corporate testing procedures. Uniquely
+    <footer className="bg-muted/30 border-t pt-20 px-4 md:px-20 lg:px-40 overflow-hidden relative">
+      {/* Decorative background */}
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 pb-16 gap-12 relative z-10">
+        <div className="space-y-6">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white font-bold text-lg">S</div>
+            <span className="text-2xl font-bold tracking-tight">Swasthya</span>
+          </div>
+          <p className="text-muted-foreground leading-relaxed">
+            Leading the way in medical excellence with a patient-centered approach. Your health is our priority.
           </p>
-          <ul>
-            <li className='flex gap-3 mb-4'>
-              <Home className='w-4 text-blue-600' />
-              Bhattachowk-1 Biratnagar Nepal
+          <ul className="space-y-4">
+            <li className="flex gap-3 text-sm group">
+              <Home className="w-5 h-5 text-primary" />
+              <span className="group-hover:text-primary transition-colors">Bhattachowk-1, Biratnagar, Nepal</span>
             </li>
-            <li className='flex gap-3 mb-4'>
-              <Phone className='w-4 text-blue-600' />
-              +977-9805912060, 021-8000
+            <li className="flex gap-3 text-sm group">
+              <Phone className="w-5 h-5 text-primary" />
+              <span className="group-hover:text-primary transition-colors">+977-9805912060</span>
             </li>
-            <li className='flex gap-3 mb-4'>
-              <Link className='flex gap-2 hover:text-blue-600' href=''>
-                <MessageCircle className='w-4 text-blue-600' />
-                info@clientgmail.com
-              </Link>
-            </li>
-            <li className='flex gap-3'>
-              <Link className='flex gap-2 hover:text-blue-600' href=''>
-                <Globe className='w-4 text-blue-600' />
-                chandra@visit.com
-              </Link>
+            <li className="flex gap-3 text-sm group">
+              <Mail className="w-5 h-5 text-primary" />
+              <span className="group-hover:text-primary transition-colors">info@swasthya.com</span>
             </li>
           </ul>
         </div>
 
         <div>
-          <h1 className='text-3xl sm:text-2xl font-bold mb-6'>Our Doctors</h1>
-          <ul>
+          <h3 className="text-lg font-bold mb-6">Our Specialists</h3>
+          <ul className="space-y-4">
             {['Dr. Nick Sims', 'Dr. Michael Linden', 'Dr. Max Turner', 'Dr. Amy Adams', 'Dr. Julia Jameson'].map((doctor, index) => (
-              <li key={index} className='flex gap-3 mb-4'>
-                <Link className='flex gap-2 hover:ml-3 hover:text-blue-600' href=''>
-                  <ChevronsRight className='w-4' />
+              <li key={index}>
+                <Link className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all text-sm" href="">
+                  <ChevronsRight className="w-4 h-4 text-primary/50" />
                   {doctor}
                 </Link>
               </li>
@@ -53,12 +49,12 @@ const Footer = () => {
         </div>
 
         <div>
-          <h1 className='text-3xl sm:text-2xl font-bold mb-6'>Our Services</h1>
-          <ul>
-            {['Outpatient Surgery', 'Cardiac Clinic', 'Ophthalmology Clinic', 'Gynaecological Clinic', 'Outpatient Rehabilitation'].map((service, index) => (
-              <li key={index} className='flex gap-3 mb-4'>
-                <Link className='flex gap-2 hover:ml-3 hover:text-blue-600' href=''>
-                  <ChevronsRight className='w-4' />
+          <h3 className="text-lg font-bold mb-6">Popular Services</h3>
+          <ul className="space-y-4">
+            {['Cardiac Clinic', 'Ophthalmology', 'Pediatrics', 'Surgery', 'Rehabilitation'].map((service, index) => (
+              <li key={index}>
+                <Link className="flex items-center gap-2 text-muted-foreground hover:text-primary hover:translate-x-1 transition-all text-sm" href="">
+                  <ChevronsRight className="w-4 h-4 text-primary/50" />
                   {service}
                 </Link>
               </li>
@@ -67,31 +63,37 @@ const Footer = () => {
         </div>
 
         <div>
-          <h1 className='text-3xl sm:text-2xl font-bold mb-6'>Opening Hours</h1>
-          <ul>
+          <h3 className="text-lg font-bold mb-6">Working Hours</h3>
+          <div className="bg-background rounded-3xl p-6 shadow-sm border space-y-4">
             {[
-              { day: "Saturday", time: "8:00 am-10:00 pm" },
-              { day: "Sunday", time: "6:00 am-8:00 pm" },
-              { day: "Monday", time: "6:00 am-2:00 pm" },
-              { day: "Tuesday", time: "7:00 am-9:00 pm" },
-              { day: "Wednesday", time: "10:00 am-12:00 pm" },
-              { day: "Thursday", time: "2:00 am-6:00 pm" },
+              { day: "Mon - Sat", time: "8:00 AM - 10:00 PM" },
+              { day: "Sunday", time: "6:00 AM - 8:00 PM" },
             ].map((hour, index) => (
-              <li key={index} className='flex justify-between items-center mb-4'>
-                <p>{hour.day}</p>
-                <p>{hour.time}</p>
-              </li>
+              <div key={index} className="flex justify-between items-center text-sm border-b last:border-0 pb-3 last:pb-0">
+                <span className="font-medium">{hour.day}</span>
+                <span className="text-primary font-bold">{hour.time}</span>
+              </div>
             ))}
-          </ul>
+            <Button className="w-full mt-4 rounded-xl shadow-lg shadow-primary/10">
+              Get Help Now
+            </Button>
+          </div>
         </div>
       </div>
 
-      <div className='flex justify-center items-center py-10 border-t border-t-gray-200'>
-        <p className='text-center text-sm'>
-          Copyright © 2021 Swasthya. Designed by ChandraDev
+      <div className="flex flex-col md:flex-row justify-between items-center py-10 border-t gap-4">
+        <p className="text-sm text-muted-foreground">
+          © 2024 Swasthya. Crafted with ❤️ for better health.
         </p>
+        <div className="flex gap-6">
+          {['Privacy', 'Terms', 'Sitemap', 'Help'].map(item => (
+            <Link key={item} href="" className="text-xs text-muted-foreground hover:text-primary transition-colors underline-offset-4 hover:underline">
+              {item}
+            </Link>
+          ))}
+        </div>
       </div>
-    </div>
+    </footer>
   );
 };
 

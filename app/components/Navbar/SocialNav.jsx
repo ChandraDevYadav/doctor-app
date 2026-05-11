@@ -1,26 +1,43 @@
-import { CirclePlay, Facebook, Instagram, MapPin, Twitter, Wifi } from 'lucide-react'
-import React from 'react'
+"use client";
+
+import { Facebook, Instagram, MapPin, Twitter, Wifi, Youtube } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const SocialNav = () => {
   return (
-    <div className='grid grid-cols-2 py-3 px-40 bg-[#8f1b1b]'>
-        <div>
-            <div className='flex justify-start items-center gap-5'>
-                <MapPin className='text-white w-5'/>
-                <p className='text-white text-sm'>ADDRESS: Bhattachowk-1 Koshi Morang Nepal</p>
-            </div>
-        </div>
-        <div>
-            <div className='flex justify-end items-center gap-4 pr-6'>
-                <Twitter className='text-white'/>
-                <Facebook className='text-white'/>
-                <Instagram className='text-white'/>
-                <Wifi className='text-white'/>
-                <CirclePlay className='text-white'/>
-            </div>
-        </div>
+    <div className='hidden lg:block bg-primary text-primary-foreground py-2 border-b border-white/10'>
+      <div className='container mx-auto px-6 flex justify-between items-center'>
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className='flex items-center gap-2 group'
+        >
+          <MapPin className='w-4 h-4 text-white/70 group-hover:text-white transition-colors' />
+          <p className='text-xs font-medium tracking-wide text-white/90 group-hover:text-white transition-colors'>
+            Bhattachowk-1, Biratnagar, Nepal
+          </p>
+        </motion.div>
+        
+        <motion.div 
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          className='flex items-center gap-6'
+        >
+          {[Twitter, Facebook, Instagram, Youtube, Wifi].map((Icon, i) => (
+            <motion.a
+              key={i}
+              href="#"
+              whileHover={{ y: -2, scale: 1.1 }}
+              className='text-white/70 hover:text-white transition-colors'
+            >
+              <Icon className='w-4 h-4' />
+            </motion.a>
+          ))}
+        </motion.div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default SocialNav
+export default SocialNav;

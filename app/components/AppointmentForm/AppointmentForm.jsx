@@ -5,6 +5,7 @@ import { ChevronsRight, Calendar, User, Phone, Stethoscope, CheckCircle2, ArrowR
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getDepartments } from "../../services/contentService";
+import { API_BASE_URL } from "../../config/api";
 
 const AppointmentForm = () => {
   const [step, setStep] = useState(1);
@@ -22,7 +23,7 @@ const AppointmentForm = () => {
   useEffect(() => {
     const fetchInitialData = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/v1/patients/doctors");
+        const res = await fetch(`${API_BASE_URL}/api/v1/patients/doctors`);
         const data = await res.json();
         if (data.status === "success") setDoctors(data.data.doctors);
 
@@ -45,7 +46,7 @@ const AppointmentForm = () => {
         return;
       }
 
-      const res = await fetch("http://localhost:5000/api/v1/patients/book", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/patients/book`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

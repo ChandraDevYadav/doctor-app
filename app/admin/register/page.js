@@ -8,6 +8,7 @@ import { Mail, Lock, User, UserPlus, Loader2, ShieldCheck, ShieldQuestion } from
 import Link from "next/link";
 import Image from "next/image";
 import { FiCamera } from "react-icons/fi";
+import { API_BASE_URL } from "../../config/api";
 
 export default function AdminRegister() {
   const [formData, setFormData] = useState({
@@ -57,7 +58,7 @@ export default function AdminRegister() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/auth/register", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

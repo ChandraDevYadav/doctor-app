@@ -5,6 +5,7 @@ import { ChevronsRight, Star, Phone, Mail, Award } from "lucide-react";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../../config/api";
 
 const ProfDoctor = () => {
   const [doctorsList, setDoctorsList] = useState([]);
@@ -13,7 +14,7 @@ const ProfDoctor = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/v1/patients/doctors");
+        const response = await fetch(`${API_BASE_URL}/api/v1/patients/doctors`);
         const data = await response.json();
         if (data.status === "success") {
           setDoctorsList(data.data.doctors);

@@ -24,6 +24,7 @@ import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { FiCamera } from "react-icons/fi";
+import { API_BASE_URL } from "../../config/api";
 
 export default function AdminDoctors() {
   const [doctors, setDoctors] = useState([]);
@@ -40,7 +41,7 @@ export default function AdminDoctors() {
         window.location.href = "/login";
         return;
       }
-      const res = await fetch(`http://localhost:5000/api/v1/admin/doctors?page=${page}&status=${statusFilter}`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/doctors?page=${page}&status=${statusFilter}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.status === 401 || res.status === 403) {
@@ -66,7 +67,7 @@ export default function AdminDoctors() {
   const handleApprove = async (id, status) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/v1/admin/doctors/${id}/approve`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/doctors/${id}/approve`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json",
@@ -113,7 +114,7 @@ export default function AdminDoctors() {
     setIsCreating(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch("http://localhost:5000/api/v1/admin/doctors", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/doctors`, {
         method: "POST",
         headers: { 
           "Content-Type": "application/json",
@@ -160,7 +161,7 @@ export default function AdminDoctors() {
     setIsEditing(true);
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/v1/admin/doctors/${editFormData.id}`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/doctors/${editFormData.id}`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json",
@@ -191,7 +192,7 @@ export default function AdminDoctors() {
     if (!doctorToDelete) return;
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/v1/admin/doctors/${doctorToDelete}`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/doctors/${doctorToDelete}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` }
       });

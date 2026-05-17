@@ -24,6 +24,7 @@ import {
   Cell
 } from "recharts";
 import { motion } from "framer-motion";
+import { API_BASE_URL } from "../config/api";
 
 const COLORS = ["#3b82f6", "#10b981", "#f59e0b", "#ef4444"];
 
@@ -39,7 +40,7 @@ export default function AdminDashboard() {
           window.location.href = "/login";
           return;
         }
-        const res = await fetch("http://localhost:5000/api/v1/admin/analytics", {
+        const res = await fetch(`${API_BASE_URL}/api/v1/admin/analytics`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

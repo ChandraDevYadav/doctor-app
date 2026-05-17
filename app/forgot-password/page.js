@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Mail, ShieldQuestion, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { API_BASE_URL } from "../config/api";
 
 export default function ForgotPassword() {
   const [step, setStep] = useState(1);
@@ -21,7 +22,7 @@ export default function ForgotPassword() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/auth/forgot-password", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/auth/forgot-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
@@ -47,7 +48,7 @@ export default function ForgotPassword() {
     setError("");
 
     try {
-      const res = await fetch("http://localhost:5000/api/v1/auth/verify-petname", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/auth/verify-petname`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, petName }),

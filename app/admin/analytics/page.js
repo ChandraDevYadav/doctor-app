@@ -16,6 +16,7 @@ import {
 } from "recharts";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import { API_BASE_URL } from "../../config/api";
 
 export default function AdminAnalytics() {
   const [analytics, setAnalytics] = useState(null);
@@ -28,7 +29,7 @@ export default function AdminAnalytics() {
           window.location.href = "/login";
           return;
         }
-        const res = await fetch("http://localhost:5000/api/v1/admin/analytics", {
+        const res = await fetch(`${API_BASE_URL}/api/v1/admin/analytics`, {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (res.status === 401 || res.status === 403) {

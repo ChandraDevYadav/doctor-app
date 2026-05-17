@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Lock, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { API_BASE_URL } from "../config/api";
 
 export default function ResetPassword() {
   const [password, setPassword] = useState("");
@@ -41,7 +42,7 @@ export default function ResetPassword() {
     try {
       const resetToken = localStorage.getItem("resetToken");
 
-      const res = await fetch("http://localhost:5000/api/v1/auth/reset-password", {
+      const res = await fetch(`${API_BASE_URL}/api/v1/auth/reset-password`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ resetToken, newPassword: password }),

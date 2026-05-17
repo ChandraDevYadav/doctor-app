@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { API_BASE_URL } from "../../config/api";
 
 export default function AdminUsers() {
   const [users, setUsers] = useState([]);
@@ -29,7 +30,7 @@ export default function AdminUsers() {
         window.location.href = "/login";
         return;
       }
-      const res = await fetch(`http://localhost:5000/api/v1/admin/users?page=${page}`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/users?page=${page}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.status === 401 || res.status === 403) {

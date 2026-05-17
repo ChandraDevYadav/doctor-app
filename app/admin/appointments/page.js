@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
+import { API_BASE_URL } from "../../config/api";
 
 export default function AdminAppointments() {
   const [appointments, setAppointments] = useState([]);
@@ -30,7 +31,7 @@ export default function AdminAppointments() {
         window.location.href = "/login";
         return;
       }
-      const res = await fetch(`http://localhost:5000/api/v1/admin/appointments?page=${page}&status=${statusFilter}`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/appointments?page=${page}&status=${statusFilter}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (res.status === 401 || res.status === 403) {
@@ -56,7 +57,7 @@ export default function AdminAppointments() {
   const handleUpdateStatus = async (id, status) => {
     try {
       const token = localStorage.getItem("token");
-      const res = await fetch(`http://localhost:5000/api/v1/admin/appointments/${id}/status`, {
+      const res = await fetch(`${API_BASE_URL}/api/v1/admin/appointments/${id}/status`, {
         method: "PATCH",
         headers: { 
           "Content-Type": "application/json",

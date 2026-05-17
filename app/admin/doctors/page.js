@@ -10,11 +10,20 @@ import {
   ChevronLeft, 
   ChevronRight,
   MoreVertical,
-  ExternalLink
+  ExternalLink,
+  Edit,
+  Trash2
 } from "lucide-react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { FiCamera } from "react-icons/fi";
 
 export default function AdminDoctors() {
   const [doctors, setDoctors] = useState([]);
@@ -75,6 +84,127 @@ export default function AdminDoctors() {
   };
 
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "", username: "", email: "", password: "", petName: "",
+    specialization: "", experience: "", fees: "", profileImage: ""
+  });
+  const [isCreating, setIsCreating] = useState(false);
+  const [imagePreview, setImagePreview] = useState(null);
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Image size should be less than 5MB");
+        return;
+      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result);
+        setFormData({ ...formData, profileImage: reader.result });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleCreateDoctor = async (e) => {
+    e.preventDefault();
+    setIsCreating(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch("http://localhost:5000/api/v1/admin/doctors", {
+        method: "POST",
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(formData)
+      });
+      if (res.ok) {
+        setIsModalOpen(false);
+        setFormData({
+          name: "", username: "", email: "", password: "", petName: "",
+          specialization: "", experience: "", fees: "", profileImage: ""
+        });
+        setImagePreview(null);
+        fetchDoctors();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsCreating(false);
+    }
+  };
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editFormData, setEditFormData] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
+
+  const openEditModal = (doctor) => {
+    setEditFormData({
+      id: doctor._id,
+      name: doctor.userId.name,
+      email: doctor.userId.email,
+      specialization: doctor.specialization,
+      experience: doctor.experience,
+      fees: doctor.fees,
+      profileImage: doctor.userId.profileImage || ""
+    });
+    setImagePreview(doctor.userId.profileImage || null);
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditDoctor = async (e) => {
+    e.preventDefault();
+    setIsEditing(true);
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/api/v1/admin/doctors/${editFormData.id}`, {
+        method: "PATCH",
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify(editFormData)
+      });
+      if (res.ok) {
+        setIsEditModalOpen(false);
+        fetchDoctors();
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setIsEditing(false);
+    }
+  };
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [doctorToDelete, setDoctorToDelete] = useState(null);
+
+  const confirmDelete = (id) => {
+    setDoctorToDelete(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const handleDeleteDoctor = async () => {
+    if (!doctorToDelete) return;
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/api/v1/admin/doctors/${doctorToDelete}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (res.ok) {
+        fetchDoctors();
+        setIsDeleteModalOpen(false);
+        setDoctorToDelete(null);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-8">
@@ -84,6 +214,9 @@ export default function AdminDoctors() {
             <p className="text-muted-foreground">Approve or manage professional doctors on your platform.</p>
           </div>
           <div className="flex gap-2">
+            <Button onClick={() => setIsModalOpen(true)} className="bg-primary text-primary-foreground font-bold rounded-xl h-10">
+              + Create Doctor
+            </Button>
             <div className="relative group">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
               <input 
@@ -184,9 +317,21 @@ export default function AdminDoctors() {
                               <XCircle className="w-4 h-4 mr-1" /> Reject
                             </Button>
                           )}
-                          <Button size="icon" variant="ghost" className="h-8 w-8">
-                            <MoreVertical className="w-4 h-4" />
-                          </Button>
+                          <DropdownMenu>
+                            <DropdownMenuTrigger asChild>
+                              <Button size="icon" variant="ghost" className="h-8 w-8">
+                                <MoreVertical className="w-4 h-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end" className="w-32">
+                              <DropdownMenuItem className="cursor-pointer" onClick={() => openEditModal(doctor)}>
+                                <Edit className="w-4 h-4 mr-2" /> Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem className="cursor-pointer text-red-600 focus:text-red-600 focus:bg-red-50" onClick={() => confirmDelete(doctor._id)}>
+                                <Trash2 className="w-4 h-4 mr-2" /> Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
                         </div>
                       </td>
                     </motion.tr>
@@ -224,6 +369,180 @@ export default function AdminDoctors() {
           </div>
         </div>
       </div>
+
+      {/* Create Doctor Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-card w-full max-w-2xl rounded-3xl p-8 border shadow-2xl relative"
+          >
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-6 right-6 text-muted-foreground hover:text-foreground">
+              <XCircle className="w-6 h-6" />
+            </button>
+            <h2 className="text-2xl font-bold mb-6">Create New Doctor</h2>
+            
+            <form onSubmit={handleCreateDoctor} className="space-y-6">
+              
+              {/* Image Upload Area */}
+              <div className="flex flex-col items-center justify-center space-y-4">
+                <div className="relative inline-block">
+                  <div className="relative group cursor-pointer w-32 h-32 rounded-full border-2 border-dashed border-primary/50 bg-primary/5 flex items-center justify-center overflow-hidden transition-all hover:bg-primary/10">
+                    {imagePreview ? (
+                      <Image src={imagePreview} alt="Preview" fill className="object-cover" />
+                    ) : (
+                      <div className="text-center p-4">
+                        <div className="w-8 h-8 bg-primary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-2">
+                          <span className="text-xl font-bold">+</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground font-medium">Upload Photo</p>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-white text-xs font-bold">Change</span>
+                    </div>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={handleImageChange}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+                  </div>
+                  <div className="absolute bottom-1 bg-primary text-primary-foreground p-2.5 rounded-full shadow-lg border-2 border-background pointer-events-none transition-transform group-hover:scale-110">
+                    <FiCamera className="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <input required type="text" placeholder="Full Name" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+                <input required type="text" placeholder="Username" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.username} onChange={e => setFormData({...formData, username: e.target.value})} />
+                <input required type="email" placeholder="Email" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} />
+                <input required type="password" placeholder="Password" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.password} onChange={e => setFormData({...formData, password: e.target.value})} />
+                <input required type="text" placeholder="Pet Name (Security)" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.petName} onChange={e => setFormData({...formData, petName: e.target.value})} />
+                <input required type="text" placeholder="Specialization" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.specialization} onChange={e => setFormData({...formData, specialization: e.target.value})} />
+                <input required type="number" placeholder="Experience (Years)" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.experience} onChange={e => setFormData({...formData, experience: e.target.value})} />
+                <input required type="number" placeholder="Consultation Fees" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={formData.fees} onChange={e => setFormData({...formData, fees: e.target.value})} />
+              </div>
+              <Button type="submit" disabled={isCreating} className="w-full mt-6 h-12 rounded-xl">
+                {isCreating ? "Creating..." : "Create Doctor"}
+              </Button>
+            </form>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Edit Doctor Modal */}
+      {isEditModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-card w-full max-w-2xl rounded-3xl p-8 border shadow-2xl relative"
+          >
+            <button onClick={() => setIsEditModalOpen(false)} className="absolute top-6 right-6 text-muted-foreground hover:text-foreground">
+              <XCircle className="w-6 h-6" />
+            </button>
+            <h2 className="text-2xl font-bold mb-6">Edit Doctor</h2>
+            
+            <form onSubmit={handleEditDoctor} className="space-y-6">
+              
+              {/* Image Upload Area */}
+              <div className="flex flex-col items-center justify-center space-y-4">
+                <div className="relative inline-block">
+                  <div className="relative group cursor-pointer w-32 h-32 rounded-full border-2 border-dashed border-primary/50 bg-primary/5 flex items-center justify-center overflow-hidden transition-all hover:bg-primary/10">
+                    {imagePreview ? (
+                      <Image 
+                        src={imagePreview.startsWith('http') || imagePreview.startsWith('data:') || imagePreview.startsWith('/') ? imagePreview : `/${imagePreview}`} 
+                        alt="Preview" fill className="object-cover" 
+                      />
+                    ) : (
+                      <div className="text-center p-4">
+                        <div className="w-8 h-8 bg-primary/20 text-primary rounded-full flex items-center justify-center mx-auto mb-2">
+                          <span className="text-xl font-bold">+</span>
+                        </div>
+                        <p className="text-xs text-muted-foreground font-medium">Upload Photo</p>
+                      </div>
+                    )}
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-white text-xs font-bold">Change</span>
+                    </div>
+                    <input 
+                      type="file" 
+                      accept="image/*" 
+                      onChange={(e) => {
+                        const file = e.target.files[0];
+                        if (file) {
+                          const reader = new FileReader();
+                          reader.onloadend = () => {
+                            setImagePreview(reader.result);
+                            setEditFormData({ ...editFormData, profileImage: reader.result });
+                          };
+                          reader.readAsDataURL(file);
+                        }
+                      }}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+                  </div>
+                  <div className="absolute bottom-1 right-1 bg-primary text-primary-foreground p-1.5 rounded-full shadow-lg border-2 border-background pointer-events-none transition-transform group-hover:scale-110">
+                    <FiCamera className="w-4 h-4" />
+                  </div>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <input required type="text" placeholder="Full Name" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={editFormData.name} onChange={e => setEditFormData({...editFormData, name: e.target.value})} />
+                <input required type="email" placeholder="Email" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={editFormData.email} onChange={e => setEditFormData({...editFormData, email: e.target.value})} />
+                <input required type="text" placeholder="Specialization" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={editFormData.specialization} onChange={e => setEditFormData({...editFormData, specialization: e.target.value})} />
+                <input required type="number" placeholder="Experience (Years)" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={editFormData.experience} onChange={e => setEditFormData({...editFormData, experience: e.target.value})} />
+                <input required type="number" placeholder="Consultation Fees" className="bg-muted/50 border rounded-xl p-3 outline-none focus:ring-2 ring-primary/20" value={editFormData.fees} onChange={e => setEditFormData({...editFormData, fees: e.target.value})} />
+              </div>
+              <Button type="submit" disabled={isEditing} className="w-full mt-6 h-12 rounded-xl">
+                {isEditing ? "Saving Changes..." : "Save Changes"}
+              </Button>
+            </form>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {isDeleteModalOpen && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4 backdrop-blur-sm">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="bg-card w-full max-w-md rounded-3xl p-8 border shadow-2xl relative text-center"
+          >
+            <div className="w-16 h-16 bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Trash2 className="w-8 h-8" />
+            </div>
+            <h2 className="text-2xl font-bold mb-2">Delete Doctor?</h2>
+            <p className="text-muted-foreground mb-8">
+              Are you sure you want to delete this doctor? This will permanently remove their account, profile, and all associated data. This action cannot be undone.
+            </p>
+            <div className="flex gap-4">
+              <Button 
+                variant="outline" 
+                className="flex-1 h-12 rounded-xl font-bold"
+                onClick={() => {
+                  setIsDeleteModalOpen(false);
+                  setDoctorToDelete(null);
+                }}
+              >
+                Cancel
+              </Button>
+              <Button 
+                variant="destructive" 
+                className="flex-1 h-12 rounded-xl font-bold bg-red-600 hover:bg-red-700"
+                onClick={handleDeleteDoctor}
+              >
+                Yes, Delete
+              </Button>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </AdminLayout>
   );
 }

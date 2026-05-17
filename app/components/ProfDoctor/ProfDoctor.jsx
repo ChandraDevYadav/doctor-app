@@ -83,7 +83,7 @@ const ProfDoctor = () => {
                 <Image
                   src={
                     doctor.userId.profileImage 
-                      ? (doctor.userId.profileImage.startsWith('/') || doctor.userId.profileImage.startsWith('http') 
+                      ? (doctor.userId.profileImage.startsWith('/') || doctor.userId.profileImage.startsWith('http') || doctor.userId.profileImage.startsWith('data:')
                           ? doctor.userId.profileImage 
                           : `/${doctor.userId.profileImage}`)
                       : "/hp2.jpg"

@@ -1,98 +1,101 @@
-import Link from 'next/link';
-import React from 'react';
-import OurDepartment from '../components/OurDepartment/OurDepartment';
+"use client";
 
-const departments = [
-  {
-    id: 1,
-    name: 'Cardiology',
-    description: 'Our Cardiology department focuses on diagnosing and treating heart conditions. We provide advanced cardiac care, including non-invasive and invasive procedures.',
-    contact: {
-      phone: '(123) 456-7891',
-      email: 'cardiology@doctorapp.com',
-    },
-  },
-  {
-    id: 2,
-    name: 'Pediatrics',
-    description: 'We specialize in providing compassionate care for children, from newborns to adolescents. Our pediatricians are experts in preventive care and treatment of childhood illnesses.',
-    contact: {
-      phone: '(123) 456-7892',
-      email: 'pediatrics@doctorapp.com',
-    },
-  },
-  {
-    id: 3,
-    name: 'Neurology',
-    description: 'The Neurology department treats disorders of the nervous system, offering treatments for conditions like epilepsy, stroke, and Alzheimer’s disease.',
-    contact: {
-      phone: '(123) 456-7893',
-      email: 'neurology@doctorapp.com',
-    },
-  },
-  {
-    id: 4,
-    name: 'Orthopedics',
-    description: 'Our Orthopedics department is dedicated to diagnosing and treating bone, joint, and muscle conditions. We offer both surgical and non-surgical treatments for musculoskeletal disorders.',
-    contact: {
-      phone: '(123) 456-7894',
-      email: 'orthopedics@doctorapp.com',
-    },
-  },
-  {
-    id: 5,
-    name: 'Dermatology',
-    description: 'The Dermatology department focuses on skin health. We offer treatments for a variety of skin conditions, from acne to skin cancer screenings.',
-    contact: {
-      phone: '(123) 456-7895',
-      email: 'dermatology@doctorapp.com',
-    },
-  },
-  {
-    id: 6,
-    name: 'Gynecology',
-    description: 'Our Gynecology department provides comprehensive care for women’s health, offering services such as routine exams, reproductive health consultations, and more.',
-    contact: {
-      phone: '(123) 456-7896',
-      email: 'gynecology@doctorapp.com',
-    },
-  },
-];
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
+import OurDepartment from "../components/OurDepartment/OurDepartment";
+import { getDepartments } from "../services/contentService";
+import { ChevronsRight, Phone, Mail, Loader2 } from "lucide-react";
 
 const DepartmentsPage = () => {
+  const [departments, setDepartments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDept = async () => {
+      try {
+        const data = await getDepartments();
+        if (data && data.length > 0) {
+          setDepartments(data);
+        }
+      } catch (err) {
+        console.error("Error fetching departments:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDept();
+  }, []);
+
   return (
-    <div>
-        <div className='grid grid-cols-1 bg-cover bg-left' style={{ backgroundImage: "url('/pageheader.jpg')" }}>
-        <div className='flex justify-center items-center py-16 md:py-24'>
-            <div className=''>
-            <h1 className='text-3xl md:text-5xl font-bold py-4 md:py-6 text-blue-600'>From Our Departments</h1>
-            <div className='text-center flex justify-center items-center'>
-            <p className='text-blue-600 text-center text-lg font-semibold'>Home&nbsp; - &nbsp;</p>
-            <Link href='/' className='text-lg font-semibold'>Departments</Link>
-            </div>
-            </div>
-        </div>
-    </div>
-        <div className="container mx-auto px-4 md:px-28 ">
-      <h1 className="text-2xl md:text-5xl text-center font-bold py-12">Our Medical Departments</h1>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {departments.map((department) => (
-          <div key={department.id} className="border p-4 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-2">{department.name}</h2>
-            <p className="text-gray-700 mb-4">{department.description}</p>
-            <div>
-              <h3 className="text-lg font-medium">Contact Information</h3>
-              <p><strong>Phone:</strong> {department.contact.phone}</p>
-              <p><strong>Email:</strong> <a href={`mailto:${department.contact.email}`} className="text-blue-500 underline">{department.contact.email}</a></p>
-            </div>
+    <div className="bg-[#f5f9ff] min-h-screen">
+      {/* Header Banner */}
+      <div className="bg-cover bg-center relative py-20 md:py-32 shadow-inner bg-gradient-to-r from-blue-900/80 to-blue-600/60" style={{ backgroundImage: "url('/pageheader.jpg')" }}>
+        <div className="absolute inset-0 bg-black/40" />
+        <div className="relative z-10 container mx-auto px-6 text-center">
+          <h1 className="text-3xl md:text-6xl font-extrabold text-white tracking-tight drop-shadow-lg">
+            Our Specialized Departments
+          </h1>
+          <div className="flex justify-center items-center mt-4 text-white/90 text-sm md:text-lg font-medium gap-2">
+            <Link href="/" className="hover:text-blue-300 transition-colors">Home</Link>
+            <span>/</span>
+            <span className="text-blue-300 font-semibold">Departments</span>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
-    <div>
-        <OurDepartment/>
-    </div>
+
+      {/* Departments Grid */}
+      <div className="container mx-auto px-6 md:px-16 lg:px-28 py-16">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <p className="text-blue-600 font-bold uppercase tracking-wider text-sm md:text-base">Comprehensive Care</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mt-2">Explore Medical Centers of Excellence</h2>
+        </div>
+
+        {loading ? (
+          <div className="flex justify-center items-center py-20">
+            <Loader2 className="w-12 h-12 animate-spin text-blue-600" />
+          </div>
+        ) : departments.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {departments.map((dept) => (
+              <div key={dept._id || dept.value} className="bg-white border border-gray-100 rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group">
+                <div>
+                  <div className="w-16 h-16 rounded-2xl bg-blue-50 flex items-center justify-center mb-6 group-hover:bg-blue-600 transition-colors duration-300">
+                    <span className="text-2xl font-bold text-blue-600 group-hover:text-white transition-colors">
+                      {dept.title ? dept.title.charAt(0) : "D"}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors">{dept.title}</h2>
+                  <p className="text-gray-600 mb-6 leading-relaxed line-clamp-3">{dept.description}</p>
+                </div>
+
+                <div className="border-t border-gray-100 pt-6 mt-4">
+                  <div className="space-y-2 mb-6 text-sm text-gray-500">
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-4 h-4 text-blue-500" />
+                      <span>(123) 456-7890</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-4 h-4 text-blue-500" />
+                      <span>{dept.value || "contact"}@swasthya.com</span>
+                    </div>
+                  </div>
+
+                  <Link href={`/departments/${dept._id}`}>
+                    <button className="w-full bg-blue-50 hover:bg-blue-600 text-blue-600 hover:text-white font-semibold py-3.5 rounded-xl transition-all flex items-center justify-center gap-2">
+                      View Full Department <ChevronsRight className="w-5 h-5" />
+                    </button>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center text-gray-500 py-12">No departments found.</div>
+        )}
+      </div>
+
+      {/* Tabs Section */}
+      <OurDepartment />
     </div>
   );
 };

@@ -53,6 +53,25 @@ export default function AdminAppointments() {
     fetchAppointments();
   }, [page, statusFilter]);
 
+  const handleUpdateStatus = async (id, status) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await fetch(`http://localhost:5000/api/v1/admin/appointments/${id}/status`, {
+        method: "PATCH",
+        headers: { 
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({ status })
+      });
+      if (res.ok) {
+        fetchAppointments(); // Refresh list
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <AdminLayout>
       <div className="space-y-8">
@@ -132,6 +151,7 @@ export default function AdminAppointments() {
                   <div className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest ${
                     apt.status === "completed" ? "bg-green-500/10 text-green-600" :
                     apt.status === "cancelled" ? "bg-red-500/10 text-red-600" :
+                    apt.status === "confirmed" ? "bg-blue-500/10 text-blue-600" :
                     "bg-amber-500/10 text-amber-600"
                   }`}>
                     {apt.status}
@@ -141,7 +161,20 @@ export default function AdminAppointments() {
                   }`}>
                     {apt.paymentStatus}
                   </div>
-                  <Button variant="ghost" size="sm" className="font-bold text-xs">View Details</Button>
+                  
+                  {apt.status === "pending" && (
+                    <div className="flex gap-2">
+                      <Button size="sm" onClick={() => handleUpdateStatus(apt._id, "confirmed")} className="h-8 bg-green-500 hover:bg-green-600 text-white rounded-lg">
+                        Accept
+                      </Button>
+                      <Button size="sm" variant="outline" onClick={() => handleUpdateStatus(apt._id, "cancelled")} className="h-8 border-red-500 text-red-600 hover:bg-red-500 hover:text-white rounded-lg">
+                        Cancel
+                      </Button>
+                    </div>
+                  )}
+                  {apt.status !== "pending" && (
+                    <Button variant="ghost" size="sm" className="font-bold text-xs">View Details</Button>
+                  )}
                 </div>
               </motion.div>
             ))}

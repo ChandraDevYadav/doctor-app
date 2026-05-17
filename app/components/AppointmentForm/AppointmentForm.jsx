@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronsRight, Calendar, User, Phone, Stethoscope, CheckCircle2, ArrowRight, ArrowLeft } from "lucide-react";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getDepartments } from "../../services/contentService";
 
 const AppointmentForm = () => {
   const [step, setStep] = useState(1);
@@ -14,16 +15,24 @@ const AppointmentForm = () => {
     date: "",
   });
   const [doctors, setDoctors] = useState([]);
+  const [departments, setDepartments] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
-    const fetchDoctors = async () => {
-      const res = await fetch("http://localhost:5000/api/v1/patients/doctors");
-      const data = await res.json();
-      if (data.status === "success") setDoctors(data.data.doctors);
+    const fetchInitialData = async () => {
+      try {
+        const res = await fetch("http://localhost:5000/api/v1/patients/doctors");
+        const data = await res.json();
+        if (data.status === "success") setDoctors(data.data.doctors);
+
+        const depts = await getDepartments();
+        if (depts) setDepartments(depts);
+      } catch (err) {
+        console.error("Error fetching initial data:", err);
+      }
     };
-    fetchDoctors();
+    fetchInitialData();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -184,9 +193,19 @@ const AppointmentForm = () => {
                               className="w-full bg-muted/50 border rounded-2xl py-4 pl-12 pr-4 focus:ring-2 ring-primary/20 outline-none transition-all appearance-none cursor-pointer"
                             >
                               <option value="">Select Specialization</option>
-                              <option value="Cardiology">Cardiology</option>
-                              <option value="Dermatology">Dermatology</option>
-                              <option value="Pediatrics">Pediatrics</option>
+                              {departments.length > 0 ? (
+                                departments.map((dept) => (
+                                  <option key={dept.value} value={dept.title}>
+                                    {dept.title}
+                                  </option>
+                                ))
+                              ) : (
+                                <>
+                                  <option value="Cardiology">Cardiology</option>
+                                  <option value="Dermatology">Dermatology</option>
+                                  <option value="Pediatrics">Pediatrics</option>
+                                </>
+                              )}
                             </select>
                           </div>
                         </div>
